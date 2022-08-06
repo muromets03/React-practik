@@ -29,8 +29,9 @@ class StopWatch extends Component {
     this.intervalId = null;
   };
   reset = () => {
-    this.stop();
+    this.stop();  
     this.setState({ time: new Date(0, 0, 0, 0, 0, 0) });
+  
   };
   componentDidMount() {
     console.log("componentDidMount");
