@@ -1,4 +1,16 @@
-import React from "react";
+// import { Formik } from "formik";
+// import React from "react";
+// import LogInForm from "./components/forms/LogInForm";
+
+
+
+// import { BrowserRouter } from "react-router-dom";
+// import Header from "./components/Header";
+// import Tree from "./components/Tree";
+// import {  ThemeContext, UserContext } from "./contexts";
+// import CONSTANTS from "./constants"
+// const {THEMES} =CONSTANTS;
+
 import Container from "./components/Grid/Container";
 import Row from "./components/Grid/Row";
 import Col from "./components/Grid/Col";
@@ -15,6 +27,7 @@ import Spinner from "./components/Spinner";
 import Cabinet from "./pages/PageNotFound/CabinetPage";
 import CounterPage from "./pages/PageNotFound/CounterPage";
 import LoaderPages from "./pages/PageNotFound/LoaderPage";
+import MouseTracker from "./components/MouseTracker";
 
 // const List = (props) => {
 //   const { title, children } = props;
@@ -27,10 +40,59 @@ import LoaderPages from "./pages/PageNotFound/LoaderPage";
 //   );
 // };
 
-const App = () => {
+
+// const App = () => {
+//     const onSubmit = (values, formikBag) => {
+//         formikBag.resetForm();
+//       };
+//     return <>
+//       <LogInForm onSubmit={onSubmit}/>
+//     </>;
+//   };
+
+
+
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       theme:THEMES.LIGHT,
+//       user: {
+//         id: 1,
+//         fname: "Elon",
+//         lname: "Musk",
+//         avatar:
+//           "https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/user_photos/000/876/317/datas/profile.jpg",
+//       },
+//     };
+//   }
+
+//   setTheme=(theme)=> this.setState({theme})
+
+// render() {
+//   console.log(UserContext);
+//   const { user,theme } = this.state;
+//   return (
+
+//     <BrowserRouter>
+//     <ThemeContext.Provider value={[theme, this.setTheme]}>
+
+//       <UserContext.Provider value={user}>
+//         <Header />
+//         <Tree  />
+//       </UserContext.Provider>
+
+//       </ThemeContext.Provider>
+//     </BrowserRouter>
+
+//   );
+// }
+// }
+
+const App=()=>{ 
+
   return (
-    <>
-      <BrowserRouter>
+<>
+       <BrowserRouter>
         <header>
           Site
           <nav>
@@ -53,6 +115,9 @@ const App = () => {
               <li>
                 <Link to="/counter">counter</Link>
               </li>
+              <li>
+                <Link to="/mousetracker">mousetracker</Link>
+              </li>
             </ul>
           </nav>
         </header>
@@ -62,6 +127,7 @@ const App = () => {
           <Route path="/signin" element={<SignInform />} />
           <Route path="/resize" element={<WindowsSize />} />
           <Route path="/counter" element={<CounterPage />} />
+          <Route path="/mousetracker" element={<MouseTracker />} />
           <Route path="/cabinet/" element={<Cabinet />}>
             <Route path="error" element={<Error />} />
             <Route path="spinner" element={<Spinner />} />
@@ -70,8 +136,10 @@ const App = () => {
         </Routes>
         <footer>@2022</footer>
       </BrowserRouter>
-    </>
+    </> 
+
   );
 };
+
 
 export default App;

@@ -20,29 +20,31 @@ class StopWatch extends Component {
     });
   };
 
-  // this.stop();
   start = () => {
-    this.componentDidUpdate();
+    if (this.intervalId === null) {
+      this.intervalId = setTimeout(this.tick, 1000);
+    }
   };
+
   stop = () => {
     clearInterval(this.intervalId);
     this.intervalId = null;
   };
   reset = () => {
-    this.stop();  
+    this.stop();
     this.setState({ time: new Date(0, 0, 0, 0, 0, 0) });
-  
   };
   componentDidMount() {
+    this.start();
     console.log("componentDidMount");
   }
   componentDidUpdate() {
     this.intervalId = setTimeout(this.tick, 1000);
-
-    console.log("componentDidUpdate");
   }
+
   componentWillUnmount() {
     console.log("componentWillUnmount");
+
     this.reset();
   }
 
