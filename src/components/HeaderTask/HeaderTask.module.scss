@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 25px;
+}
+
+h1 {
+  margin: auto;
+  text-align: center;
+  color: #fff;
+}
+
+.btn {
+  text-decoration: none;
+  background-color: rgb(22, 11, 177);
+  color: #fff;
+  border: 2px solid white;
+  text-align: center;
+  align-items: center;
+  border-color: #fff;
+  height: 30px;
+  width: 90px;
+  border-radius: 5px;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 300px;
+  min-height: 70vh;
+  margin: auto;
+}
+
+.error{
+  color: red;
+}

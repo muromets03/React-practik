@@ -1,10 +1,13 @@
 // import { Formik } from "formik";
 // import React from "react";
 // import LogInForm from "./components/forms/LogInForm";
+// import HeaderTask from "./components/HeaderTask";
 
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import HomePage from "./components/HeaderTask/HomePage";
+// import LoginPage from "./components/HeaderTask/LoginPage";
+// import SignUpPage from "./components/HeaderTask/SignUpPage";
 
-
-// import { BrowserRouter } from "react-router-dom";
 // import Header from "./components/Header";
 // import Tree from "./components/Tree";
 // import {  ThemeContext, UserContext } from "./contexts";
@@ -40,17 +43,22 @@ import MouseTracker from "./components/MouseTracker";
 //   );
 // };
 
-
 // const App = () => {
-//     const onSubmit = (values, formikBag) => {
-//         formikBag.resetForm();
-//       };
-//     return <>
-//       <LogInForm onSubmit={onSubmit}/>
-//     </>;
-//   };
-
-
+//   const onSubmit = (values, formikBag) => {
+//       formikBag.resetForm();}
+//   //   }; {/* <LogInForm onSubmit={onSubmit}/> */}
+//   return (
+  
+//     <BrowserRouter>
+//       <HeaderTask />
+//       <Routes>
+//         <Route path="/" element={<HomePage />} />
+//         <Route path="/login" element={<LoginPage onSubmit={onSubmit}/>} />
+//         <Route path="/signup" element={<SignUpPage />} />
+//       </Routes>
+//     </BrowserRouter>
+//   );
+// };
 
 //   constructor(props) {
 //     super(props);
@@ -88,7 +96,7 @@ import MouseTracker from "./components/MouseTracker";
 // }
 // }
 
-const App=()=>{ 
+const App=()=>{
 
   return (
 <>
@@ -136,10 +144,9 @@ const App=()=>{
         </Routes>
         <footer>@2022</footer>
       </BrowserRouter>
-    </> 
+    </>
 
   );
 };
-
 
 export default App;

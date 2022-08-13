@@ -1,25 +1,23 @@
-import React from "react";
+import React from 'react';
 import { Form, Formik } from "formik";
 import { SCHEMA_LOGIN } from "../../../utils/validateSchemas";
-import styles from "./LoginInForm.module.scss";
-import InputInLabel from "../InputInLabel";
+import styles from "../HeaderTask.module.scss";
+import InputInLabel from "../../forms/InputInLabel";
 import { PropTypes } from 'prop-types';
 
-
-
 const initialValues = {
-  login: "",
-  password: "",
-};
+    login: "",
+    password: "",
+  };
+  
 
-
-
-const LogInForm = (props) => {
- 
-  return (
-    <Formik
+const LoginPage = () => {
+    return (
+        <>
+            <h1>LOGIN TO YOUR ACCOUNT</h1>
+            <Formik
       initialValues={initialValues}
-      onSubmit={props.onSubmit}
+    //   onSubmit={props.onSubmit}
       validationSchema={SCHEMA_LOGIN}
     >
       {(formikProps) => {
@@ -37,13 +35,12 @@ const LogInForm = (props) => {
         );
       }}
     </Formik>
-  );
-};
+        </>
+    );
+}
 
-
-LogInForm.propTypes = {
+LoginPage.propTypes = {
     onSubmit: PropTypes.func,
 }
 
-
-export default LogInForm;
+export default LoginPage;

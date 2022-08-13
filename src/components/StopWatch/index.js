@@ -39,7 +39,10 @@ class StopWatch extends Component {
     console.log("componentDidMount");
   }
   componentDidUpdate() {
-    this.intervalId = setTimeout(this.tick, 1000);
+   if( this.intervalId){
+    setTimeout(this.tick, 1000);
+   }
+   
   }
 
   componentWillUnmount() {
