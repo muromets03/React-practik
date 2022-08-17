@@ -4,7 +4,7 @@ import FuncStopWatch from "./components/FuncStopWatch";
 // import LogInForm from "./components/forms/LogInForm";
 // import HeaderTask from "./components/HeaderTask";
 
-import { UserContext } from "./contexts";
+import { UserContext , ThemeContext} from "./contexts";
 
 import LearnHooks from "./components/LearnHooks";
 
@@ -22,12 +22,13 @@ import HomePage from "./pages/HomePage";
 
 // import Header from "./components/Header";
 // import Tree from "./components/Tree";
-import {  ThemeContext } from "./contexts";
+
 import UserCard from "./components/UserCard";
 import WindowsSize from "./components/WindowsSize";
 //import { boolean } from "yup";
-// import CONSTANTS from "./constants"
-//const {THEMES} =CONSTANTS;
+ import CONSTANTS from "./constants"
+import UserProfile from "./components/UserProfile";
+const {THEMES} =CONSTANTS;
 
 // import Container from "./components/Grid/Container";
 // import Row from "./components/Grid/Row";
@@ -61,19 +62,18 @@ const App = () => {
     lname: "Musk",
     isSelected: false,
   })
-  const [theme, setTheme]= useState(true)
-  const handlerTheme =()=>{
-    setTheme(!theme)
-  }
+
+  const themeState =useState(THEMES.LIGHT)
+
   return (
-    <div style={{backgroundColor:(theme?'#fff':"#222"), color:(theme?'#222':"#fff")}}>
+    <ThemeContext.Provider value ={themeState}>
   
      <UserContext.Provider value={[user,setUser]}>
-      <button onClick={handlerTheme}> switch theme</button>
+      
 
     <BrowserRouter>
      <li>
-                <Link to="/usercard">loader</Link>
+                <Link to="/userprofile">UserProfile</Link>
              </li>
              <li>
                 <Link to="/">Home</Link>
@@ -87,22 +87,19 @@ const App = () => {
             
             
 
-    <ThemeContext.Provider value={[theme]}>
-
-    </ThemeContext.Provider>
+   
     <Routes>
       <Route path="" element={<HomePage/>}/>
-      <Route path="/usercard" element={<UserCard />} />
+      <Route path="/userprofile" element={<UserProfile />} />
       <Route path="/func" element={< FuncStopWatch/>}/>
       <Route path="/ws" element={<  WindowsSize/>}/>
      
     </Routes>
     </BrowserRouter>
     </UserContext.Provider> 
-    {/* <button onClick={handleSwitch}>switch</button>
-    
-      {isVisible && < FuncStopWatch/>} */}
-    </div>
+    </ThemeContext.Provider>
+  
+   
   );
 };
 
