@@ -1,9 +1,10 @@
 // import { Formik } from "formik";
- import React from "react";
+ import React, {useState} from "react";
+import FuncStopWatch from "./components/FuncStopWatch";
 // import LogInForm from "./components/forms/LogInForm";
 // import HeaderTask from "./components/HeaderTask";
 
-
+import { UserContext } from "./contexts";
 
 import LearnHooks from "./components/LearnHooks";
 
@@ -13,17 +14,20 @@ import LearnHooks from "./components/LearnHooks";
 
 
 
-
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
+ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 // import HomePage from "./components/HeaderTask/HomePage";
 // import LoginPage from "./components/HeaderTask/LoginPage";
 // import SignUpPage from "./components/HeaderTask/SignUpPage";
 
 // import Header from "./components/Header";
 // import Tree from "./components/Tree";
-// import {  ThemeContext, UserContext } from "./contexts";
+import {  ThemeContext } from "./contexts";
+import UserCard from "./components/UserCard";
+import WindowsSize from "./components/WindowsSize";
+//import { boolean } from "yup";
 // import CONSTANTS from "./constants"
-// const {THEMES} =CONSTANTS;
+//const {THEMES} =CONSTANTS;
 
 // import Container from "./components/Grid/Container";
 // import Row from "./components/Grid/Row";
@@ -46,10 +50,59 @@ import LearnHooks from "./components/LearnHooks";
 /*----------------15.08.2022 React-Hooks---------------------------------*/
 
 const App = () => {
+  
+  // const [user]=useState({id:1,name:'Elon Musk'})
+  // const [theme]= useState({theme})
+  // const [isVisible, setIsVisible]= useState (true)
+  // const handleSwitch =()=>{setIsVisible(!isVisible)}
+  const [user, setUser]= useState({
+    id:1,
+    fname: "Elon",
+    lname: "Musk",
+    isSelected: false,
+  })
+  const [theme, setTheme]= useState(true)
+  const handlerTheme =()=>{
+    setTheme(!theme)
+  }
   return (
-    <>
-      <LearnHooks />
-    </>
+    <div style={{backgroundColor:(theme?'#fff':"#222"), color:(theme?'#222':"#fff")}}>
+  
+     <UserContext.Provider value={[user,setUser]}>
+      <button onClick={handlerTheme}> switch theme</button>
+
+    <BrowserRouter>
+     <li>
+                <Link to="/usercard">loader</Link>
+             </li>
+             <li>
+                <Link to="/">Home</Link>
+             </li>
+             <li>
+                <Link to="/func">FuncStopWatch</Link>
+             </li>
+             <li>
+                <Link to="/ws">WindowsSize</Link>
+             </li>
+            
+            
+
+    <ThemeContext.Provider value={[theme]}>
+
+    </ThemeContext.Provider>
+    <Routes>
+      <Route path="" element={<HomePage/>}/>
+      <Route path="/usercard" element={<UserCard />} />
+      <Route path="/func" element={< FuncStopWatch/>}/>
+      <Route path="/ws" element={<  WindowsSize/>}/>
+     
+    </Routes>
+    </BrowserRouter>
+    </UserContext.Provider> 
+    {/* <button onClick={handleSwitch}>switch</button>
+    
+      {isVisible && < FuncStopWatch/>} */}
+    </div>
   );
 };
 
