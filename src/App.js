@@ -8,13 +8,13 @@ import { UserContext , ThemeContext} from "./contexts";
 
 import LearnHooks from "./components/LearnHooks";
 
+import SignUpForm from "./components/SignUpForm"
 
 
 
 
 
-
- import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+ import { BrowserRouter, Link, Route, Routes, NavLink } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 // import HomePage from "./components/HeaderTask/HomePage";
 // import LoginPage from "./components/HeaderTask/LoginPage";
@@ -28,6 +28,7 @@ import WindowsSize from "./components/WindowsSize";
 //import { boolean } from "yup";
  import CONSTANTS from "./constants"
 import UserProfile from "./components/UserProfile";
+import { useClicker } from "./hooks";
 const {THEMES} =CONSTANTS;
 
 // import Container from "./components/Grid/Container";
@@ -65,13 +66,24 @@ const App = () => {
 
   const themeState =useState(THEMES.LIGHT)
 
+  const count =useClicker(0)
   return (
     <ThemeContext.Provider value ={themeState}>
   
      <UserContext.Provider value={[user,setUser]}>
       
-
+     <p>Count: {count}</p>
     <BrowserRouter>
+    <nav>
+      <ul>
+        <li>
+          <NavLink to="/home"> Home </NavLink>
+        </li>
+        <li>
+        <NavLink to="/signup"> SignUp </NavLink>
+        </li>
+      </ul>
+      </nav>
      <li>
                 <Link to="/userprofile">UserProfile</Link>
              </li>
@@ -82,17 +94,17 @@ const App = () => {
                 <Link to="/func">FuncStopWatch</Link>
              </li>
              <li>
-                <Link to="/ws">WindowsSize</Link>
+                <Link to="/uc">SignUpForm</Link>
              </li>
             
             
 
    
     <Routes>
-      <Route path="" element={<HomePage/>}/>
+      <Route path="/home" element={<HomePage/>}/>
       <Route path="/userprofile" element={<UserProfile />} />
       <Route path="/func" element={< FuncStopWatch/>}/>
-      <Route path="/ws" element={<  WindowsSize/>}/>
+      <Route path="/signup" element={<SignUpForm/>}/>
      
     </Routes>
     </BrowserRouter>
