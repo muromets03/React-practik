@@ -6,6 +6,10 @@ const CONSTANTS = {
   LANGUAGE:{
     UKRAINIAN: "UKRAINIAN",
     RUSSIAN: "RUSSIAN",
+  },
+  MENU_ACTIONS:{
+    MENU_OPEN:"MENU_OPEN",
+    MENU_CLOSE:"MENU_CLOSE",
   }
 };
 

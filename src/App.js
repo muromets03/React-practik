@@ -1,21 +1,21 @@
 // import { Formik } from "formik";
- import React, {useState} from "react";
-import FuncStopWatch from "./components/FuncStopWatch";
-// import LogInForm from "./components/forms/LogInForm";
-// import HeaderTask from "./components/HeaderTask";
+import React, { useState, useReducer, useId } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomePage from "./pages/HomePage";
+import { UserContext, ThemeContext, MenuContext } from "./contexts";
+import { useClicker } from "./hooks";
+import SignUpForm from "./components/SignUpForm";
+import Chat from "./components/Chat";
+import NavMenu from "./components/NavMenu";
+import reducer from "./reducerApp";
 
-import { UserContext , ThemeContext} from "./contexts";
+
 
 import LearnHooks from "./components/LearnHooks";
 
-import SignUpForm from "./components/SignUpForm"
 
 
-
-
-
- import { BrowserRouter, Link, Route, Routes, NavLink } from "react-router-dom";
-import HomePage from "./pages/HomePage";
 // import HomePage from "./components/HeaderTask/HomePage";
 // import LoginPage from "./components/HeaderTask/LoginPage";
 // import SignUpPage from "./components/HeaderTask/SignUpPage";
@@ -26,10 +26,12 @@ import HomePage from "./pages/HomePage";
 import UserCard from "./components/UserCard";
 import WindowsSize from "./components/WindowsSize";
 //import { boolean } from "yup";
- import CONSTANTS from "./constants"
+
 import UserProfile from "./components/UserProfile";
-import { useClicker } from "./hooks";
-const {THEMES} =CONSTANTS;
+
+import CONSTANTS from "./constants";
+const { THEMES, MENU_ACTIONS } = CONSTANTS;
+
 
 // import Container from "./components/Grid/Container";
 // import Row from "./components/Grid/Row";
@@ -52,66 +54,47 @@ const {THEMES} =CONSTANTS;
 /*----------------15.08.2022 React-Hooks---------------------------------*/
 
 const App = () => {
-  
   // const [user]=useState({id:1,name:'Elon Musk'})
   // const [theme]= useState({theme})
   // const [isVisible, setIsVisible]= useState (true)
   // const handleSwitch =()=>{setIsVisible(!isVisible)}
-  const [user, setUser]= useState({
-    id:1,
+  const [user, setUser] = useState({
+    id: 1,
     fname: "Elon",
     lname: "Musk",
     isSelected: false,
-  })
+  });
 
-  const themeState =useState(THEMES.LIGHT)
+  const themeState = useState(THEMES.LIGHT);
 
-  const count =useClicker(0)
+  const count = useClicker(0);
+
+  const [state, dispatch] = useReducer(reducer, { isMenuOpen: false });
+
+  const menuOpen = () => dispatch({ type: MENU_ACTIONS.MENU_OPEN });
+  const menuClose = () => dispatch({ type: MENU_ACTIONS.MENU_CLOSE });
+  const idOpen =useId();
   return (
-    <ThemeContext.Provider value ={themeState}>
-  
-     <UserContext.Provider value={[user,setUser]}>
-      
-     <p>Count: {count}</p>
-    <BrowserRouter>
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/home"> Home </NavLink>
-        </li>
-        <li>
-        <NavLink to="/signup"> SignUp </NavLink>
-        </li>
-      </ul>
-      </nav>
-     <li>
-                <Link to="/userprofile">UserProfile</Link>
-             </li>
-             <li>
-                <Link to="/">Home</Link>
-             </li>
-             <li>
-                <Link to="/func">FuncStopWatch</Link>
-             </li>
-             <li>
-                <Link to="/uc">SignUpForm</Link>
-             </li>
-            
-            
-
-   
-    <Routes>
-      <Route path="/home" element={<HomePage/>}/>
-      <Route path="/userprofile" element={<UserProfile />} />
-      <Route path="/func" element={< FuncStopWatch/>}/>
-      <Route path="/signup" element={<SignUpForm/>}/>
-     
-    </Routes>
-    </BrowserRouter>
-    </UserContext.Provider> 
+    <MenuContext.Provider value={{state, menuClose, menuOpen, idOpen}}>
+    <ThemeContext.Provider value={themeState}>
+      <UserContext.Provider value={[user, setUser]}>
+        <MenuIcon onClick={menuOpen} id={idOpen} tabIndex='0' onKeyDown={([key])=>{
+          if (key==='Enter'){
+            menuOpen()
+          }
+        }}/>
+        {/* <p> Count: {count}</p> */}
+        <BrowserRouter>
+          <NavMenu />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/signup" element={<SignUpForm />} />
+            <Route path="/chat" element={<Chat />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
     </ThemeContext.Provider>
-  
-   
+  </MenuContext.Provider>
   );
 };
 
